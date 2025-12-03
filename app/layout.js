@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { dark } from "@clerk/themes";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata = {
   title: "EventHub",
@@ -41,7 +42,8 @@ export default function RootLayout({ children }) {
                 <div className="relative z-10 ">{children}</div>{" "}
                 {/* min-h-[80vh] */}
                 {/* Footer */}
-                <Footer />
+                <Footer /> 
+                <Toaster  richColors/>
               </main>
             </ConvexClientProvider>
           </ClerkProvider>
