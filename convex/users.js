@@ -1,4 +1,6 @@
+import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { internal } from "./_generated/api";
 
 export const store = mutation({
   args: {},
@@ -22,12 +24,13 @@ export const store = mutation({
     if (user !== null) {
       // If we've seen this identity before but the name has changed, patch the value.
       if (user.name !== identity.name) {
-        await ctx.db.patch(user._id, { 
+        await ctx.db.patch(user._id, {
           name: identity.name,
-          updatedAt: Date.now()
+          updatedAt: Date.now(),
         });
       }
-      return user._id;    }
+      return user._id;
+    }
     // If it's a new identity, create a new `User`.
     return await ctx.db.insert("users", {
       name: identity.name ?? "Anonymous",
@@ -36,7 +39,7 @@ export const store = mutation({
       imageUrl: identity.pictureUrl,
       hasCompletedOnboarding: false,
       freeEventsCreated: 0,
-      createdAt: Date.now(), 
+      createdAt: Date.now(),
       updatedAt: Date.now(),
     });
   },
@@ -63,3 +66,24 @@ export const getCurrentUser = query({
   },
 });
 
+export const completeOnboarding = mutation({
+  args: {
+    location: v.object({
+      city: v.string(),
+      district: v.optional(v.string()),
+      country: v.string(),
+    }),
+    interests: v.array(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+    await ctx.db.patch(user._id, {
+      location: args.location,
+      interests: args.interests,
+      hasCompletedOnboarding: true,
+      updatedAt: Date.now(),
+    });
+    return user._id;
+  },
+});

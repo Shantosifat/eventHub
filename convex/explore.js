@@ -19,7 +19,7 @@ export const getFeaturedEvents = query({
 
     //   sort by registration count for featured
     const featured = events
-      .sort((a, b) => b.registeredCount - a.registeredCount)
+      .sort((a, b) => b.registrationCount ?? 0 - a.registrationCount ?? 0)
       .slice(0, args.limit ?? 3);
 
     return featured;
@@ -31,7 +31,7 @@ export const getFeaturedEvents = query({
 export const getEventsByLocation = query({
   args: {
     city: v.optional(v.string()),
-    district: v.optional(v.string()),
+   district: v.optional(v.string()),
     limit: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
@@ -43,15 +43,24 @@ export const getEventsByLocation = query({
       .filter((q) => q.gte(q.field("startDate"), now)) //   gte = grater than or equals to
       .collect();
 
-    //   Filter by city or district
+    //   Filter by city orstate
+    // if (args.city) {
+    //   events = events.filter(
+    //     (event) => event.city.toLowerCase() === args.city.toLowerCase()
+    //   );
+    // } else if (args.district) {
+    //   events = events.filter(
+    //     (event) => event.district.toLowerCase() === args.district.toLowerCase()
+    //   );
+    // }
     if (args.city) {
-      events = events.filter(
-        (event) => event.city.toLowerCase() === args.city.toLowerCase()
-      );
-    } else if (args.district) {
-      events = events.filter(
-        (event) => event.district.toLowerCase() === args.district.toLowerCase()
-      );
+      const city = args.city.toLowerCase();
+      events = events.filter((e) => e.city?.toLowerCase().includes(city));
+    }
+
+    if (!args.city && args.district) {
+      const dis = args.district.toLowerCase();
+      events = events.filter((e) => e.district?.toLowerCase().includes(dis));
     }
 
     return events.slice(0, args.limit ?? 4);

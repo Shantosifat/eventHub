@@ -9,11 +9,16 @@ import { Authenticated, Unauthenticated } from "convex/react";
 import { BarLoader } from "react-spinners";
 import { useStoreUser } from "@/hooks/use-store-user";
 import { Building, Plus, Ticket } from "lucide-react";
+import OnboardingModal from "./onboarding-modal";
+import { useOnboarding } from "@/hooks/use-onboarding";
 
 const Header = () => {
   const { isLoading } = useStoreUser();
 
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+  const { showOnboarding, handleOnboardingComplete, handleOnboardingSkip } =
+    useOnboarding();
 
   return (
     <>
@@ -36,7 +41,11 @@ const Header = () => {
           {/* Right side action */}
           <div className="flex items-center">
             {/* pricing button */}
-            <Button variant="ghost" size="sm" onClick={() => setShowUpgradeModal(true)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowUpgradeModal(true)}
+            >
               Pricing
             </Button>
             {/* explore button */}
@@ -89,7 +98,12 @@ const Header = () => {
         )}
       </nav>
 
-      {/* subscription modal */}
+      {/*  modal */}
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onClose={handleOnboardingSkip}
+        onComplete={handleOnboardingComplete}
+      />
     </>
   );
 };
