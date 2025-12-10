@@ -1,3 +1,5 @@
+"use client"
+
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useConvexQuery } from "./use-convex-query";
@@ -18,7 +20,7 @@ export function useOnboarding() {
     if (isLoading || !currentUser) return;
 
     // Check if user hasn't completed onboarding
-    if (!currentUser.hasCompleteOnboarding) {
+    if (!currentUser.hasCompletedOnboarding) {
       // Check if current page requires onboarding
       const requireOnboarding = ATTENDEE_PAGES.some((page) =>
         pathName.startsWith(page)
@@ -48,6 +50,6 @@ export function useOnboarding() {
     setShowOnboarding,
     handleOnboardingComplete,
     handleOnboardingSkip,
-    needsOnboarding: currentUser && !currentUser.hasCompleteOnboarding,
+    needsOnboarding: currentUser && !currentUser.hasCompletedOnboarding,
   };
 }

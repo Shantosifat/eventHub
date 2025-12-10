@@ -64,7 +64,23 @@ const OnboardingModal = ({ isOpen, onClose, onComplete }) => {
     );
   };
 
-  const handleComplete = async () => {};
+    const handleComplete = async () => {
+    try {
+      await completeOnboarding({
+        location: {
+          city: location.city,
+          district: location.district,
+          country: location.country,
+        },
+        interests: selectedInterests,
+      });
+      toast.success("Welcome to EventHub! 🎉");
+      onComplete();
+    } catch (error) {
+      toast.error("Failed to complete onboarding");
+      console.error(error);
+    }
+  };
 
   const handleNext = () => {
     if (step === 1 && selectedInterests.length < 3) {
