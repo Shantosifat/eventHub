@@ -15,7 +15,7 @@ export default defineSchema({
     location: v.optional(
       v.object({
         city: v.string(),
-       district: v.optional(v.string()),
+        district: v.optional(v.string()),
         country: v.string(),
       })
     ),
@@ -50,14 +50,12 @@ export default defineSchema({
     endDate: v.number(),
     timeZone: v.optional(v.string()),
 
-    
-
     // location(optional)
     locationType: v.union(v.literal("physical"), v.literal("online")),
     venue: v.optional(v.string()),
     address: v.optional(v.string()),
     city: v.string(),
-   district: v.optional(v.string()),
+    district: v.optional(v.string()),
     country: v.string(),
 
     // capacity & ticketing
