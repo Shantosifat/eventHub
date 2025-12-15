@@ -10,7 +10,7 @@ export const createEvent = mutation({
     tags: v.array(v.string()),
     startDate: v.number(),
     endDate: v.number(),
-    timezone: v.string(),
+    // timezone: v.string(),
     locationType: v.union(v.literal("physical"), v.literal("online")),
     venue: v.optional(v.string()),
     address: v.optional(v.string()),
@@ -22,31 +22,14 @@ export const createEvent = mutation({
     ticketPrice: v.optional(v.number()),
     coverImage: v.optional(v.string()),
     themeColor: v.optional(v.string()),
-    hasPro: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     try {
       // to check which user is logged in
       const user = await ctx.runQuery(internal.users.getCurrentUser);
 
-      // SERVER-SIDE CHECK: Verify event limit for Free users
-      if (!hasPro && user.freeEventCreated >= 1) {
-        throw new Error(
-          "Free event limit reached. Please upgrade to Pro to create more events."
-        );
-      }
-
-      // SERVER-SIDE CHECK: Verify custom color usage
-      const defaultColor = "#1e3a8a";
-      if (!hasPro && args.themeColor && args.themeColor !== defaultColor) {
-        throw new Error(
-          "Custom theme colors are a Pro feature. Please upgrade to Pro."
-        );
-      }
-
       // Force default color for Free users
-      const themeColor = hasPro ? args.themeColor : defaultColor;
-
+      const themeColor = args.themeColor;
       // Generate slug from title
       const slug = args.title
         .toLowerCase()
@@ -113,7 +96,7 @@ export const deleteEvent = mutation({
     const user = await ctx.runQuery(internal.users.getCurrentUser);
 
     // check if its a valid event or not
-    const event = await ctx.db.et(args.eventId);
+    const event = await ctx.db.get(args.eventId);
     if (!event) {
       throw new Error("Event not found");
     }
