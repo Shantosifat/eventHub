@@ -199,7 +199,7 @@ const CreateEvent = () => {
       });
 
       toast.success("Event created successfully! 🎉");
-    //   router.push("/my-events");
+      router.push("/my-events");
     } catch (error) {
       toast.error(error.message || "Failed to create event");
     }

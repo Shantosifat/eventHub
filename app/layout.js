@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
                   <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl" />
                   <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-600/20 rounded-full blur-3xl" />
                 </div>
-                <div className="relative z-10 ">{children}</div>{" "}
+                <div className="relative z-10 min-h-[80vh] ">{children}</div>
                 {/* min-h-[80vh] */}
                 {/* Footer */}
                 <Footer /> 

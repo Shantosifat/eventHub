@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 
 // Generate unique QR code ID
@@ -9,6 +9,7 @@ function generateQRCode() {
 }
 
 // Register for an event
+
 export const registerForEvent = mutation({
   args: {
     eventId: v.id("events"),
@@ -57,5 +58,25 @@ export const registerForEvent = mutation({
       registrationCount: event.registrationCount + 1,
     });
     return registrationId;
+  },
+});
+
+// Check if user is registered for an event
+
+export const checkRegistration = query({
+  args: { eventId: v.id("events") },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+    if (!user) return null;
+
+    const registration = await ctx.db
+      .query("registrations")
+      .withIndex("by_event_user", (q) =>
+        q.eq("eventId", args.eventId).eq("userId", user._id)
+      )
+      .unique();
+
+    return registration;
   },
 });
