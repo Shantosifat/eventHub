@@ -80,3 +80,66 @@ export const checkRegistration = query({
     return registration;
   },
 });
+
+// Get users registration(tickets)
+export const getMyRegistrations = query({
+  handler: async (ctx) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+    const registrations = await ctx.db
+      .query("registrations")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .order("desc")
+      .collect();
+
+    // Fetch event details for each registration
+
+    const registrationsWithEvents = await Promise.all(
+      registrations.map(async (reg) => {
+        const event = await ctx.db.get(reg.eventId);
+        return {
+          ...reg,
+          event,
+        };
+      })
+    );
+    return registrationsWithEvents;
+  },
+});
+
+// Cancel registration
+export const cancelRegistration = mutation({
+  args: { registrationId: v.id("registrations") },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+    const registration = await ctx.db.get(args.registrationId);
+    if (!registration) {
+      throw new Error("Registration not found");
+    }
+
+    // Check if user owns this registration
+    if (registration.userId !== user._id) {
+      throw new Error("You are not authorized to cancel this registration");
+    }
+
+    const event = await ctx.db.get(registration.eventId);
+    if (!event) {
+      throw new Error("Event not found");
+    }
+
+    // Update registration status
+    await ctx.db.patch(args.registrationId, {
+      status: "cancelled",
+    });
+
+    // Decrement event registration count
+    if (event.registrationCount > 0) {
+      await ctx.db.patch(registration.eventId, {
+        registrationCount: event.registrationCount - 1,
+      });
+    }
+
+    return { success: true };
+  },
+});

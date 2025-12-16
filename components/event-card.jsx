@@ -10,12 +10,12 @@ import { Button } from "./ui/button";
 const EventCard = ({
   event,
   onClick,
-  showActions = false,
   onDelete,
   variant = "grid",
+  action = null, // event/ticket/null
   className = "",
 }) => {
-    // List variant 
+  // List variant
   if (variant === "list") {
     return (
       <Card
@@ -64,7 +64,7 @@ const EventCard = ({
       </Card>
     );
   }
-    // Grid variant (default - original design)
+  // Grid variant (default - original design)
   return (
     <Card
       className={`overflow-hidden group pt-0 ${onClick ? "cursor-pointer hover:shadow-lg transition-all hover:border-purple-500/50" : ""} ${className}`}
@@ -128,7 +128,7 @@ const EventCard = ({
 
         {/* for my event page */}
 
-        {showActions && (
+        {action && (
           <div className="flex gap-2 pt-2">
             {/* Primary button */}
             <Button
