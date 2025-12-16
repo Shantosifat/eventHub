@@ -4,15 +4,28 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { api } from "@/convex/_generated/api";
 import { useConvexQuery } from "@/hooks/use-convex-query";
 import { getCategoryIcon, getCategoryLabel } from "@/lib/data";
 import { useUser } from "@clerk/nextjs";
 import { format } from "date-fns";
-import { Calendar, Clock, ExternalLink, Loader2, MapPin } from "lucide-react";
+import {
+  Calendar,
+  CheckCircle,
+  Clock,
+  ExternalLink,
+  Loader2,
+  MapPin,
+  Share2,
+  Ticket,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { toast } from "sonner";
+import RegisterModal from "./_components/register-modal";
 
 const EventPage = () => {
   const params = useParams();
@@ -30,6 +43,33 @@ const EventPage = () => {
     event?._id ? { eventId: event._id } : "skip"
   );
 
+  const handleShare = async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: event.title,
+          text: event.description.slice(0, 100) + "...",
+          url: url,
+        });
+      } catch (error) {
+        // User cancelled or error occurred
+      }
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(url);
+      toast.success("Link copied to clipboard!");
+    }
+  };
+
+  const handleRegister = () => {
+    if (!user) {
+      toast.error("Please sign in to register");
+      return;
+    }
+    setShowRegisterModal(true);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -42,10 +82,14 @@ const EventPage = () => {
     notFound();
   }
 
+  const isEventFull = event.registrationCount >= event.capacity;
+  const isEventPast = event.endDate < Date.now();
+  const isOrganizer = user?.id === event.organizerId;
+
   return (
     <div
       style={{ backgroundColor: event.themeColor || "#1e3a8a" }}
-      className="min-h-screen -mt-6 md:-mt-16"
+      className="min-h-screen py-8 -mt-6 md:-mt-16"
     >
       {/* ui */}
       <div className="max-w-7xl mx-auto px-8">
@@ -83,9 +127,8 @@ const EventPage = () => {
           </div>
         )}
       </div>
-
       {/* All details */}
-      <div className="grid lg:grid-cols-[1fr_380px] gap-8">
+      <div className="grid lg:grid-cols-[1fr_380px] px-5 gap-8">
         {/* Main content */}
         <div className="space-y-8">
           {/* description */}
@@ -144,37 +187,148 @@ const EventPage = () => {
 
           {/* organizer info */}
           <Card
-              className={"pt-0"}
-              style={{
-                backgroundColor: event.themeColor
-                  || "#1e3a8a",
-              }}
-            >
-              <CardContent className="pt-6">
-                <h2 className="text-2xl font-bold mb-4">Organizer</h2>
-                <div className="flex items-center gap-3">
-                  <Avatar className="w-12 h-12">
-                    <AvatarImage src="" />
-                    <AvatarFallback>
-                      {event.organizerName.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-semibold">{event.organizerName}</p>
-                    <p className="text-sm text-muted-foreground">
-                      Event Organizer
-                    </p>
-                  </div>
+            className={"pt-0"}
+            style={{
+              backgroundColor: event.themeColor || "#1e3a8a",
+            }}
+          >
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-bold mb-4">Organizer</h2>
+              <div className="flex items-center gap-3">
+                <Avatar className="w-12 h-12">
+                  <AvatarImage src="" />
+                  <AvatarFallback>
+                    {event.organizerName.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold">{event.organizerName}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Event Organizer
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* sidebar - registratyion card */}
-        <div className="lg:sticky lg:top-24 h-fit"></div>
-      </div>
+        <div className="lg:sticky lg:top-24 h-fit">
+          <Card
+            className={"pt-0 overflow-hidden"}
+            style={{
+              backgroundColor: event.themeColor || "#1e3a8a",
+            }}
+          >
+            <CardContent className="p-6 space-y-4">
+              {/* Price */}
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Price</p>
+                <p className="text-3xl font-bold">
+                  {event.ticketType === "free"
+                    ? "Free"
+                    : `৳${event.ticketPrice}`}
+                </p>
+                {event.ticketType === "paid" && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Pay at event offline
+                  </p>
+                )}
+              </div>
 
-      {/* register modal */}
+              <Separator />
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Users className="w-4 h-4" />
+                    <span className="text-sm">Attendees</span>
+                  </div>
+                  <p className="font-semibold">
+                    {event.registrationCount} / {event.capacity}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-sm">Date</span>
+                  </div>
+                  <p className="font-semibold text-sm">
+                    {format(event.startDate, "MMM dd")}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-sm">Time</span>
+                  </div>
+                  <p className="font-semibold text-sm">
+                    {format(event.startDate, "h:mm a")}
+                  </p>
+                </div>
+              </div>
+              <Separator />
+
+              {/* Registration Button */}
+
+              {registration ? (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-green-600 bg-green-50 p-3 rounded-lg">
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="font-medium">You&apos;re registered!</span>
+                  </div>
+                  <Button
+                    className="w-full gap-2"
+                    onClick={() => router.push("/my-tickets")}
+                  >
+                    <Ticket className="w-4 h-4" />
+                    View Ticket
+                  </Button>
+                </div>
+              ) : isEventPast ? (
+                <Button className="w-full" disabled>
+                  Event Ended
+                </Button>
+              ) : isEventFull ? (
+                <Button className="w-full" disabled>
+                  Event Full
+                </Button>
+              ) : isOrganizer ? (
+                <Button
+                  className="w-full"
+                  onClick={() => router.push(`/events/${event.slug}/manage`)}
+                >
+                  Manage Event
+                </Button>
+              ) : (
+                <Button className="w-full gap-2" onClick={handleRegister}>
+                  <Ticket className="w-4 h-4" />
+                  Register for Event
+                </Button>
+              )}
+
+              {/* Share Button */}
+              <Button
+                variant="outline"
+                className="w-full gap-2"
+                onClick={handleShare}
+              >
+                <Share2 className="w-4 h-4" />
+                Share Event
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      {/* Register Modal */}
+      {showRegisterModal && (
+        <RegisterModal
+          event={event}
+          isOpen={showRegisterModal}
+          onClose={() => setShowRegisterModal(false)}
+        />
+      )}
     </div>
   );
 };
