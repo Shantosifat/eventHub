@@ -29,6 +29,7 @@ import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import AttendeeCard from "./_components/attendee-card";
+import QRScannerModal from "./_components/qr-scanner-modal";
 
 const EventDashboard = () => {
   const params = useParams();
@@ -333,6 +334,13 @@ const EventDashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
+      {/* QR Scanner Modal */}
+      {showQRScanner && (
+        <QRScannerModal
+          isOpen={showQRScanner}
+          onClose={() => setShowQRScanner(false)}
+        />
+      )}
     </div>
   );
 };
