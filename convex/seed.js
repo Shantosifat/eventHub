@@ -18,10 +18,10 @@ Whether you're a seasoned React developer or just getting started, this workshop
 Light refreshments will be provided. Limited seats available.`,
     category: "tech",
     tags: ["tech", "react", "javascript", "frontend"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Bashundhara+City+Shopping+Complex",
-    address: "Bashundhara City, Panthapath, Dhaka",
+    address: "Work Square, Gulshan, Dhaka ",
     capacity: 50,
     ticketType: "free",
     coverImage:
@@ -44,7 +44,7 @@ Network with fellow AI enthusiasts and developers. Q&A session included.
 Pizza and drinks provided!`,
     category: "tech",
     tags: ["tech", "ai", "machine-learning", "llm"],
-    city: "Chittagong",
+    city: "Agrabad",
     district: "Chattogram",
     venue: "https://maps.google.com/?q=Chittagong+IT+Hub",
     address: "Chittagong IT Hub, Agrabad, Chittagong",
@@ -56,7 +56,7 @@ Pizza and drinks provided!`,
   },
   {
     title: "Indie Music Night - Acoustic Sessions",
-    description: `An evening of soulful acoustic performances by indie artists from across India!
+    description: `An evening of soulful acoustic performances by indie artists from across Bangladesh!
 
 Featuring:
 - 5 handpicked indie bands
@@ -69,7 +69,7 @@ Experience the raw talent of upcoming musicians in an intimate setting. Perfect 
 Food and beverages available for purchase at the venue.`,
     category: "music",
     tags: ["music", "indie", "acoustic", "live"],
-    city: "Dhaka",
+    city: "Dhanmondi",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Dhaka+Art+Center",
     address: "Dhaka Art Center, Dhanmondi, Dhaka",
@@ -95,10 +95,10 @@ This is your chance to expand your professional network, find potential co-found
 Continental breakfast included in registration.`,
     category: "business",
     tags: ["business", "networking", "startup", "entrepreneurship"],
-    city: "Dhaka",
+    city: "Banani",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Work+Square+Dhaka",
-    address: "Work Square, Gulshan, Dhaka",
+    address: "Banani",
     capacity: 40,
     ticketType: "paid",
     ticketPrice: 300,
@@ -121,7 +121,7 @@ Suitable for all skill levels. Bring your camera (phone cameras welcome too!). O
 Chai stops included along the way!`,
     category: "art",
     tags: ["art", "photography", "culture", "walking-tour"],
-    city: "Dhaka",
+    city: "Dhanmondi",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Ahsan+Manzil",
     address: "Ahsan Manzil, Shabagh, Dhaka",
@@ -148,10 +148,10 @@ This is the first session of our 6-week bootcamp series. Perfect for beginners w
 Laptop required. Course materials provided.`,
     category: "education",
     tags: ["education", "coding", "fullstack", "beginner"],
-    city: "Dhaka",
-    district: "Dhaka",
-    venue: "https://maps.google.com/?q=North+South+University",
-    address: "North South University, Bashundhara, Dhaka",
+    city: "Cox's Bazar",
+    district: "Chattogram",
+    venue: "https://maps.google.com/?q=Coxs+Bazar+Convention+Hall",
+    address: "Cox's Bazar, Chattogram",
     capacity: 30,
     ticketType: "free",
     coverImage:
@@ -173,10 +173,10 @@ Register as a team (5 players + 2 substitutes) or individually (we'll match you 
 Referee provided. Water and energy drinks available. Medical support on standby.`,
     category: "sports",
     tags: ["sports", "football", "tournament", "fitness"],
-    city: "Chittagong",
-    district: "Chattogram",
+    city: "Srimangal",
+    district: "Sylhet",
     venue: "https://maps.google.com/?q=Bangabandhu+Stadium+Chittagong",
-    address: "Bangabandhu Stadium, Chittagong",
+    address: "Tea Garden Retreat, Sylhet",
     capacity: 56,
     ticketType: "paid",
     ticketPrice: 350,
@@ -199,10 +199,10 @@ Our chef instructor will guide you through preparing a full plant-based meal fro
 Taste everything you cook! Great for health enthusiasts and curious foodies alike.`,
     category: "food",
     tags: ["food", "cooking", "health", "vegan"],
-    city: "Dhaka",
-    district: "Dhaka",
+    city: "Srimangal",
+    district: "Sylhet",
     venue: "https://maps.google.com/?q=Bangladesh+Cooking+Studio",
-    address: "Bangladesh Cooking Studio, Dhanmondi, Dhaka",
+    address: "Tea Garden Retreat, Sylhet",
     capacity: 20,
     ticketType: "paid",
     ticketPrice: 1200,
@@ -225,10 +225,10 @@ Suitable for all levels - modifications provided for beginners. Our certified in
 Yoga mats provided. Please wear comfortable clothing.`,
     category: "health",
     tags: ["health", "yoga", "meditation", "wellness"],
-    city: "Sylhet",
-    district: "Sylhet",
+    city: "Rangpur City",
+    district: "Rangpur",
     venue: "https://maps.google.com/?q=Tea+Garden+Retreat+Sylhet",
-    address: "Tea Garden Retreat, Sylhet",
+    address: "Rangpur",
     capacity: 35,
     ticketType: "paid",
     ticketPrice: 450,
@@ -251,7 +251,7 @@ All skill levels welcome. Bring your own peripherals (mouse, headset). High-spec
 Energy drinks and snacks available. Exciting commentary and crowd interaction!`,
     category: "gaming",
     tags: ["gaming", "esports", "valorant", "tournament"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Game+Arena+Dhaka",
     address: "Game Arena, Gulshan, Dhaka",
@@ -281,7 +281,7 @@ Topics covered:
 Open to all genders. Q&A session and networking lunch included.`,
     category: "networking",
     tags: ["networking", "women-in-tech", "leadership", "career"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Grameen+Phone+Office+Dhaka",
     address: "Grameen Phone Office, Gulshan, Dhaka",
@@ -308,11 +308,11 @@ Package includes:
 
 Moderate fitness level required. Age 16+ recommended.
 
-Transport from Delhi available at additional cost.`,
+Transport from Sylhet available at additional cost.`,
     category: "outdoor",
     tags: ["outdoor", "trekking", "adventure", "camping"],
     city: "Srimangal",
-    district: "Moulvibazar",
+    district: "Sylhet",
     venue: "https://maps.google.com/?q=Srimangal+Tea+Gardens",
     address: "Srimangal Tea Gardens, Moulvibazar",
     capacity: 20,
@@ -338,7 +338,7 @@ All cleaning materials provided. Wear comfortable clothes you don't mind getting
 Refreshments provided. A great way to give back to nature while meeting like-minded people!`,
     category: "community",
     tags: ["community", "environment", "volunteer"],
-    city: "Khulna",
+    city: "Sonadanga",
     district: "Khulna",
     venue: "https://maps.google.com/?q=Shyamnagar+Riverbank",
     address: "Shyamnagar Riverbank, Khulna",
@@ -366,7 +366,7 @@ Intermediate JavaScript knowledge required. Bring your laptop with Node.js insta
 Code examples and cheat sheets provided.`,
     category: "tech",
     tags: ["tech", "javascript", "performance", "advanced"],
-    city: "Dhaka",
+    city: "Dhanmondi",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=BUET+Dhaka",
     address: "BUET, Dhaka",
@@ -398,9 +398,9 @@ Prizes for:
 Sleeping bags welcome. Food and drinks provided throughout.`,
     category: "gaming",
     tags: ["gaming", "game-development", "hackathon", "indie"],
-    city: "Dhaka",
+    city: "Banani",
     district: "Dhaka",
-    venue: "https://maps.google.com/?q=Bangalore+International+Centre", // placeholder
+    venue: "https://maps.google.com/?q=Dhaka+Game+Lab+Banani",
     address: "Dhaka Game Lab, Banani, Dhaka",
     capacity: 60,
     ticketType: "paid",
@@ -430,7 +430,7 @@ Perfect for product managers, entrepreneurs, and developers looking to add AI to
 Lunch and refreshments included. Bring your laptop!`,
     category: "tech",
     tags: ["tech", "ai", "product", "startup"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Dhaka+Innovation+Hub",
     address: "Dhaka Innovation Hub, Gulshan, Dhaka",
@@ -462,7 +462,7 @@ This intimate gathering is perfect for early-stage founders, aspiring entreprene
 Continental breakfast and unlimited coffee included!`,
     category: "business",
     tags: ["business", "startup", "networking", "entrepreneurship"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Work+Square+Dhaka",
     address: "Work Square, Gulshan, Dhaka",
@@ -488,7 +488,7 @@ Day 2 - Street Photography:
 - Finding compelling stories
 - Composition techniques
 - Candid vs posed shots
-- Photo walk in Cyber Hub
+- Photo walk in Dhanmondi
 - Ethics in street photography
 
 Equipment: DSLR/Mirrorless camera required (no phone cameras for this workshop). Tripod optional.
@@ -498,7 +498,7 @@ All skill levels welcome. You'll leave with a portfolio of stunning images!
 Snacks and beverages provided both days.`,
     category: "art",
     tags: ["art", "photography", "workshop", "creative"],
-    city: "Dhaka",
+    city: "Dhanmondi",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Dhaka+Art+Center",
     address: "Dhaka Art Center, Dhanmondi, Dhaka",
@@ -522,8 +522,8 @@ Tournament format:
 - Live commentary
 
 Prizes:
-- Winner: ₹1,00,000 + Trophy
-- Runner-up: ₹50,000
+- Winner: ৳1,00,000 + Trophy
+- Runner-up: ৳50,000
 - Best Batsman, Bowler & Player awards
 
 Register your company team (11 players + 4 substitutes). Individual registrations also open - we'll form mixed teams.
@@ -538,7 +538,7 @@ What's included:
 Perfect for team building and corporate bonding!`,
     category: "sports",
     tags: ["sports", "cricket", "corporate", "tournament"],
-    city: "Dhaka",
+    city: "Mirpur",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Mirpur+Stadium",
     address: "Mirpur Stadium, Dhaka",
@@ -575,7 +575,7 @@ Yoga mats and meditation cushions provided. Wear comfortable clothing.
 Healthy snacks and herbal teas included.`,
     category: "health",
     tags: ["health", "wellness", "mindfulness", "corporate"],
-    city: "Dhaka",
+    city: "Banani",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Dhaka+Wellness+Studio",
     address: "Dhaka Wellness Studio, Banani, Dhaka",
@@ -591,7 +591,7 @@ Healthy snacks and herbal teas included.`,
     description: `Pizza making and tasting workshop. Learn dough secrets and toppings. Fun for all ages!`,
     category: "food",
     tags: ["food"],
-    city: "Dhaka",
+    city: "Dhanmondi",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Cooking+Studio+Dhaka",
     address: "Cooking Studio, Dhanmondi, Dhaka",
@@ -606,7 +606,7 @@ Healthy snacks and herbal teas included.`,
     description: `Explore React and Next.js advancements, server-side rendering, and best practices for scalable applications.`,
     category: "tech",
     tags: ["tech"],
-    city: "Dhaka",
+    city: "Gulshan",
     district: "Dhaka",
     venue: "https://maps.google.com/?q=Dhaka+Innovation+Lab",
     address: "Dhaka Innovation Lab, Gulshan, Dhaka",
