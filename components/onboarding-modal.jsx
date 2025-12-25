@@ -227,7 +227,7 @@ const OnboardingModal = ({ isOpen, onClose, onComplete }) => {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-purple-500 mt-0.5" />
                     <div>
-                      <p className="font-medium">Your location</p>
+                      <p className="font-medium">Your location!</p>
                       <p className="text-sm text-muted-foreground">
                         {location.city}, {location.district}, {location.country}
                       </p>
